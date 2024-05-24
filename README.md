@@ -13,35 +13,35 @@ download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Falmalinux-
 
 AlmaLinux OS is an open-source, community-driven Linux operating system that fills the gap left by the discontinuation of the CentOS Linux stable release. AlmaLinux OS is an Enterprise Linux distro, binary compatible with RHEL®, and guided and built by the community.
 
-As a standalone, completely free OS, AlmaLinux OS enjoys $1M in annual sponsorship from CloudLinux Inc. and support from more than 25 other sponsors. Ongoing development efforts are governed by the members of the community.
+As a standalone, completely free OS, AlmaLinux OS enjoys \$1M in annual sponsorship from CloudLinux Inc. and support from more than 25 other sponsors. Ongoing development efforts are governed by the members of the community.
 
 Learn more about AlmaLinux: <https://almalinux.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
--   [`alvistack/almalinux-9`](https://app.vagrantup.com/alvistack/boxes/almalinux-9)
-    -   [`packer/almalinux-9-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-libvirt/packer.json)
-    -   [`packer/almalinux-9-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-virtualbox/packer.json)
--   [`alvistack/almalinux-8`](https://app.vagrantup.com/alvistack/boxes/almalinux-8)
-    -   [`packer/almalinux-8-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-8-libvirt/packer.json)
-    -   [`packer/almalinux-8-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-8-virtualbox/packer.json)
+- [`alvistack/almalinux-9`](https://app.vagrantup.com/alvistack/boxes/almalinux-9)
+  - [`packer/almalinux-9-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-libvirt/packer.json)
+  - [`packer/almalinux-9-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-virtualbox/packer.json)
+- [`alvistack/almalinux-8`](https://app.vagrantup.com/alvistack/boxes/almalinux-8)
+  - [`packer/almalinux-8-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-8-libvirt/packer.json)
+  - [`packer/almalinux-8-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-8-virtualbox/packer.json)
 
 ## Overview
 
--   Packaging with [Packer](https://www.packer.io/)
--   Minimal [Vagrant base box
-    implementation](https://www.vagrantup.com/docs/boxes/base)
--   Support [QEMU Guest
-    Agent](https://wiki.qemu.org/Features/GuestAgent)
--   Support [VirtualBox Guest
-    Additions](https://www.virtualbox.org/manual/ch04.html)
--   Support [Vagrant synced folder with
-    rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
--   Support [Vagrant provisioner with
-    Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
--   Standardize disk partition with GPT
--   Standardize file system mount with UUID
--   Standardize network interface with `eth0`
+- Packaging with [Packer](https://www.packer.io/)
+- Minimal [Vagrant base box
+  implementation](https://www.vagrantup.com/docs/boxes/base)
+- Support [QEMU Guest
+  Agent](https://wiki.qemu.org/Features/GuestAgent)
+- Support [VirtualBox Guest
+  Additions](https://www.virtualbox.org/manual/ch04.html)
+- Support [Vagrant synced folder with
+  rsync](https://www.vagrantup.com/docs/synced-folders/rsync)
+- Support [Vagrant provisioner with
+  Ansible](https://www.vagrantup.com/docs/provisioning/ansible)
+- Standardize disk partition with GPT
+- Standardize file system mount with UUID
+- Standardize network interface with `eth0`
 
 ### Quick Start
 
@@ -93,12 +93,12 @@ latest packages provided by the base image project.
 
 ## License
 
--   Code released under [Apache License 2.0](LICENSE)
--   Docs released under [CC BY
-    4.0](http://creativecommons.org/licenses/by/4.0/)
+- Code released under [Apache License 2.0](LICENSE)
+- Docs released under [CC BY
+  4.0](http://creativecommons.org/licenses/by/4.0/)
 
 ## Author Information
 
--   Wong Hoi Sing Edison
-    -   <https://twitter.com/hswong3i>
-    -   <https://github.com/hswong3i>
+- Wong Hoi Sing Edison
+  - <https://twitter.com/hswong3i>
+  - <https://github.com/hswong3i>
