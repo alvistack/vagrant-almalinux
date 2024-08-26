@@ -39,7 +39,7 @@
       "headless": true,
       "http_directory": "./",
       "iso_checksum": "1e5d7da3d84d5d9a5a1177858a5df21b868390bfccf7f0f419b1e59acc293160",
-      "iso_url": "http://repo.almalinux.org/almalinux/9.4/isos/x86_64/AlmaLinux-9.4-x86_64-boot.iso",
+      "iso_url": "http://ftp.osuosl.org/pub/almalinux/9.4/isos/x86_64/AlmaLinux-9.4-x86_64-boot.iso",
       "memory": 16384,
       "net_device": "virtio-net",
       "qemu_binary": "kvm",
