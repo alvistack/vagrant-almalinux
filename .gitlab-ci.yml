@@ -268,7 +268,7 @@ build:almalinux-9-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - build:almalinux-9-libvirt
+    - deploy:almalinux-9-libvirt
 
 test:almalinux-9-virtualbox:
   <<: *job-molecule-test
@@ -354,7 +354,7 @@ build:almalinux-8-virtualbox:
     _PROVIDER: virtualbox
     _ARCHITECTURE: amd64
   needs:
-    - build:almalinux-8-libvirt
+    - deploy:almalinux-8-libvirt
 
 test:almalinux-8-virtualbox:
   <<: *job-molecule-test
