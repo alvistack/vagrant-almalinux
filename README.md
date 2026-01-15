@@ -9,7 +9,7 @@ tag](https://img.shields.io/github/tag/alvistack/vagrant-almalinux.svg)](https:/
 [![GitHub
 license](https://img.shields.io/github/license/alvistack/vagrant-almalinux.svg)](https://github.com/alvistack/vagrant-almalinux/blob/master/LICENSE)
 [![Vagrant Box
-download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Falmalinux-9&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Falmalinux-9)](https://app.vagrantup.com/alvistack/boxes/almalinux-9)
+download](https://img.shields.io/badge/dynamic/json?label=alvistack%2Falmalinux-10&query=%24.boxes%5B%3A1%5D.downloads&url=https%3A%2F%2Fapp.vagrantup.com%2Fapi%2Fv1%2Fsearch%3Fq%3Dalvistack%2Falmalinux-10)](https://app.vagrantup.com/alvistack/boxes/almalinux-10)
 
 AlmaLinux OS is an open-source, community-driven Linux operating system that fills the gap left by the discontinuation of the CentOS Linux stable release. AlmaLinux OS is an Enterprise Linux distro, binary compatible with RHEL®, and guided and built by the community.
 
@@ -19,6 +19,9 @@ Learn more about AlmaLinux: <https://almalinux.org/>
 
 ## Supported Boxes and Respective Packer Template Links
 
+- [`alvistack/almalinux-10`](https://app.vagrantup.com/alvistack/boxes/almalinux-10)
+  - [`packer/almalinux-10-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-10-libvirt/packer.json)
+  - [`packer/almalinux-10-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-10-virtualbox/packer.json)
 - [`alvistack/almalinux-9`](https://app.vagrantup.com/alvistack/boxes/almalinux-9)
   - [`packer/almalinux-9-libvirt/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-libvirt/packer.json)
   - [`packer/almalinux-9-virtualbox/packer.json`](https://github.com/alvistack/vagrant-almalinux/blob/master/packer/almalinux-9-virtualbox/packer.json)
@@ -51,7 +54,7 @@ commands under your [project
 directory](https://learn.hashicorp.com/tutorials/vagrant/getting-started-project-setup?in=vagrant/getting-started):
 
     # Initialize Vagrant
-    vagrant init alvistack/almalinux-9
+    vagrant init alvistack/almalinux-10
 
     # Start the virtual machine
     vagrant up
@@ -69,8 +72,8 @@ You could also run our
 have [Vagrant](https://www.vagrantup.com/) and
 [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on AlmaLinux 9 Stream
-    molecule converge -s almalinux-9-libvirt
+    # Run Molecule on AlmaLinux 10 Stream
+    molecule converge -s almalinux-10-libvirt
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on
 running Molecule.

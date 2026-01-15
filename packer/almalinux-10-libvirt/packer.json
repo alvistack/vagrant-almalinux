@@ -1,6 +1,7 @@
 {
   "builders": [
     {
+      "accelerator": "kvm",
       "boot_command": [
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
@@ -12,77 +13,61 @@
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
         "<tab><tab><tab><tab><tab><tab><tab><tab><tab><tab><wait>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "vmlinuz initrd=initrd.img inst.stage2=cdrom quite text <wait5>",
+        "c<wait5>",
+        "set gfxpayload=keep<enter><wait5>",
+        "linux /images/pxeboot/vmlinuz <wait5>",
+        "inst.stage2=cdrom quite text <wait5>",
         "net.ifnames=0 biosdevname=0 systemd.unified_cgroup_hierarchy=1 <wait5>",
         "inst.ks=http://{{.HTTPIP}}:{{.HTTPPort}}/ks.cfg <wait5>",
-        "<enter>"
+        "---<enter><wait5>",
+        "initrd /images/pxeboot/initrd.img<enter><wait5>",
+        "boot<enter>"
       ],
       "boot_wait": "1s",
       "cpus": 2,
-      "disk_size": 131072,
-      "gfx_accelerate_3d": false,
-      "gfx_controller": "vboxsvga",
-      "guest_additions_mode": "upload",
-      "guest_os_type": "RedHat_64",
+      "disk_cache": "writeback",
+      "disk_compression": true,
+      "disk_image": false,
+      "disk_interface": "virtio",
+      "disk_size": "131072M",
+      "format": "qcow2",
       "headless": true,
       "http_directory": "./",
-      "iso_checksum": "494d09.708b325ef42899b5ce38ba1b17755a639f5558b9b98a031b0696e694a",
-      "iso_url": "http://ftp.osuosl.org/pub/almalinux/9.7/isos/x86_64/AlmaLinux-9.7-x86_64-boot.iso",
+      "iso_checksum": "68a9e14fa252c817d11a3c80306e5a21b2db37c21173fd3f52a9eb6ced25a4a0",
+      "iso_url": "http://ftp.osuosl.org/pub/almalinux/10.1/isos/x86_64/AlmaLinux-10.1-x86_64-boot.iso",
       "memory": 16384,
+      "net_device": "virtio-net",
+      "qemu_binary": "kvm",
+      "qemuargs": [
+        [
+          "-cpu",
+          "host"
+        ]
+      ],
       "shutdown_command": "sudo shutdown -h now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
       "ssh_read_write_timeout": "600s",
       "ssh_timeout": "120m",
       "ssh_username": "vagrant",
-      "type": "virtualbox-iso",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpu-profile",
-          "host"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nested-hw-virt",
-          "on"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nat-localhostreachable1",
-          "on"
-        ]
-      ],
-      "vrdp_bind_address": "0.0.0.0",
-      "vrdp_port_max": 6000,
-      "vrdp_port_min": 5900
+      "type": "qemu",
+      "vnc_bind_address": "0.0.0.0",
+      "vnc_port_max": 6000,
+      "vnc_port_min": 5900
     }
   ],
   "post-processors": [
     {
       "inline": [
         "set -eu",
-        "export _IMAGE=\"$(ls -1d output-virtualbox-iso/packer-virtualbox-iso-*.vmdk)\"",
-        "sudo qemu-img convert -f vmdk -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
+        "export _IMAGE=\"output-qemu/packer-qemu\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 \"$_IMAGE\" \"$_IMAGE.convert\"",
         "sudo rm -rf \"$_IMAGE\"",
         "sudo chmod a+r /boot/vmlinuz*",
         "sudo virt-customize --no-network -a \"$_IMAGE.convert\" --delete \"/var/lib/*/random-seed\" --delete \"/var/lib/wicked/*\" --firstboot-command \"/usr/local/bin/virt-sysprep-firstboot.sh\"",
         "sudo virt-sysprep --operations defaults,-ssh-userdir,-customize -a \"$_IMAGE.convert\"",
         "sudo virt-sparsify --in-place \"$_IMAGE.convert\"",
-        "sudo qemu-img convert -f qcow2 -O vmdk \"$_IMAGE.convert\" \"$_IMAGE\"",
+        "sudo qemu-img convert -f qcow2 -O qcow2 -c \"$_IMAGE.convert\" \"$_IMAGE\"",
         "sudo rm -rf \"$_IMAGE.convert\""
       ],
       "type": "shell-local"
@@ -91,7 +76,7 @@
       "compression_level": 9,
       "keep_input_artifact": true,
       "output": "output-vagrant/package.box",
-      "provider_override": "virtualbox",
+      "provider_override": "libvirt",
       "type": "vagrant"
     }
   ],
@@ -104,11 +89,7 @@
         "sudo yum update -y",
         "sudo yum install -y --allowerasing ca-certificates curl gcc glibc-common glibc-langpack-en gnupg2 hostname iproute python3 sudo yum-utils",
         "sudo yum install -y --allowerasing coreutils curl",
-        "sudo yum install -y http://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/d/dkms-3.1.7-3.el9.noarch.rpm",
-        "sudo yum install -y bzip2 dkms kernel-devel",
-        "sudo mount -o loop VBoxGuestAdditions.iso /mnt",
-        "(echo 'y' | sudo sh /mnt/VBoxLinuxAdditions.run) || echo $?",
-        "sudo umount /mnt"
+        "sudo yum install -y qemu-guest-agent"
       ],
       "type": "shell"
     },
